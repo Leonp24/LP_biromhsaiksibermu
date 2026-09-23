@@ -448,9 +448,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer & Kredit */}
       <footer className="w-full bg-[#0d162e] text-white/50 py-12 px-6 md:px-12">
-        <div className="max-w-[90rem] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="max-w-[90rem] mx-auto flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
           <div className="flex flex-col items-center md:items-start gap-5 text-center md:text-left">
             <img src={logo} alt="Logo SiberMu" className="h-7 w-auto object-contain brightness-0 invert opacity-90" />
             <p className="text-xs md:text-sm leading-relaxed max-w-sm">
@@ -460,10 +460,23 @@ export default function App() {
             </p>
           </div>
           
+          {/* Hak Cipta diganti atas nama kamu sesuai aturan lomba */}
           <div className="flex flex-col items-center md:items-end gap-2 text-[10px] md:text-xs font-medium uppercase tracking-widest text-white/40 text-center md:text-right">
-            <p className="text-white/70 font-bold">Dikembangkan oleh Leonando Prastiko</p>
-            <p>Hak Cipta &copy; 2026 Leonp24.</p>
+            <p className="text-white/70 font-bold">Desain & Pengembangan UI/UX</p>
+            <p>Hak Cipta &copy; 2026 Leonando Prastiko.</p>
           </div>
+        </div>
+
+        {/* Bagian Kredit Media Sesuai Aturan Lomba */}
+        <div className="max-w-[90rem] mx-auto pt-6 border-t border-white/10 text-[9px] md:text-[10px] text-white/30 text-center md:text-left leading-relaxed">
+          <p className="font-bold mb-1 text-white/40 uppercase tracking-widest">Kredit & Atribusi Media:</p>
+          <p>
+            Seluruh aset media yang digunakan pada halaman ini bebas hak cipta. 
+            Tipografi: <a href="https://fonts.google.com/specimen/DM+Sans" target="_blank" rel="noreferrer" className="hover:text-white transition-colors underline decoration-white/20 underline-offset-2">DM Sans (Google Fonts)</a>. 
+            Ikonografi: <a href="https://lucide.dev/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors underline decoration-white/20 underline-offset-2">Lucide React</a>. 
+            Aset Visual (Fotografi): Dihasilkan menggunakan AI (Google Gemini). 
+            Logo & Merek Dagang: Hak Milik Universitas Siber Muhammadiyah.
+          </p>
         </div>
       </footer>
     </div>
