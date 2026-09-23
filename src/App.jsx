@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronDown, MessageCircle, Star, BookOpen, Mic, HeartHandshake, Headset } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronDown, MessageCircle, Star, BookOpen, Mic, HeartHandshake, Headset, Menu, X, LogIn } from 'lucide-react';
 
 import logo from './assets/logo.png';
 import video from './assets/sibermu-hero.mp4';
@@ -79,8 +79,7 @@ const KemahasiswaanAccordion = () => {
         <div
           key={item.id}
           onClick={() => setActiveIndex(idx)}
-          className={`relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-700 ease-in-out ${activeIndex === idx ? "flex-[4] md:flex-[5]" : "flex-[1]"
-            }`}
+          className={`relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-700 ease-in-out ${activeIndex === idx ? "flex-[4] md:flex-[5]" : "flex-[1]"}`}
         >
           <img
             src={item.img}
@@ -88,13 +87,9 @@ const KemahasiswaanAccordion = () => {
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          <div className={`absolute inset-0 transition-opacity duration-700 ${activeIndex === idx
-            ? 'bg-gradient-to-t from-[#1a2c5b] via-[#1a2c5b]/60 to-transparent opacity-100'
-            : 'bg-[#1a2c5b]/50 hover:bg-[#1a2c5b]/40'
-            }`}></div>
+          <div className={`absolute inset-0 transition-opacity duration-700 ${activeIndex === idx ? 'bg-gradient-to-t from-[#1a2c5b] via-[#1a2c5b]/60 to-transparent opacity-100' : 'bg-[#1a2c5b]/50 hover:bg-[#1a2c5b]/40'}`}></div>
 
-          <div className={`absolute bottom-0 left-0 p-6 md:p-10 transition-all duration-700 ease-out w-full flex flex-col justify-end ${activeIndex === idx ? 'opacity-100 translate-y-0 delay-200' : 'opacity-0 translate-y-8 pointer-events-none'
-            }`}>
+          <div className={`absolute bottom-0 left-0 p-6 md:p-10 transition-all duration-700 ease-out w-full flex flex-col justify-end ${activeIndex === idx ? 'opacity-100 translate-y-0 delay-200' : 'opacity-0 translate-y-8 pointer-events-none'}`}>
             <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight leading-tight drop-shadow-md">
               {item.title}
             </h3>
@@ -103,12 +98,16 @@ const KemahasiswaanAccordion = () => {
             </p>
           </div>
 
-          <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${activeIndex === idx ? 'opacity-0 pointer-events-none' : 'opacity-100'
-            }`}>
+          <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${activeIndex === idx ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+            {/* Teks Vertikal (Desktop) */}
             <span
-              className="text-white font-bold tracking-widest uppercase text-sm md:text-lg whitespace-nowrap drop-shadow-lg"
+              className="hidden md:block text-white font-bold tracking-widest uppercase md:text-lg whitespace-nowrap drop-shadow-lg"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
             >
+              {item.title}
+            </span>
+            {/* Teks Horizontal (Mobile) */}
+            <span className="md:hidden text-white font-bold tracking-widest uppercase text-xs whitespace-nowrap drop-shadow-lg px-4 text-center">
               {item.title}
             </span>
           </div>
@@ -172,6 +171,7 @@ const FaqAccordion = () => {
 export default function App() {
   const fontFamily = "'DM Sans', sans-serif";
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Efek transisi background navbar saat discroll
   useEffect(() => {
@@ -183,34 +183,72 @@ export default function App() {
   return (
     <div className="w-full bg-[#f8f9fa] font-sans text-slate-900 selection:bg-[#1a2c5b] selection:text-white" style={{ fontFamily }}>
 
-      {/* ================= STICKY NAVBAR ================= */}
+      {/* Navigasi Utama */}
       <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-in-out ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
         <div className="max-w-[90rem] mx-auto px-6 md:px-12 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <img src={logo} alt="Logo SiberMu" className={`h-7 md:h-8 w-auto object-contain transition-all duration-300 ${!isScrolled && 'brightness-0 invert'}`} />
           </div>
-          <div className={`hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${isScrolled ? 'text-slate-600' : 'text-white/90'}`}>
+          
+          {/* Menu Desktop */}
+          <div className={`hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${isScrolled ? 'text-slate-600' : 'text-white/90'}`}>
             <a href="#about" className={`hover:text-[#1a2c5b] transition-colors ${!isScrolled && 'hover:text-white'}`}>Profil Biro</a>
             <a href="#kemahasiswaan" className={`hover:text-[#1a2c5b] transition-colors ${!isScrolled && 'hover:text-white'}`}>Kemahasiswaan</a>
             <a href="#aik" className={`hover:text-[#1a2c5b] transition-colors ${!isScrolled && 'hover:text-white'}`}>AIK</a>
+            
+            {/* Tombol Login SSO (Layanan dihapus agar lebih clean) */}
+            <div className="flex items-center gap-3 ml-4">
+               <a href="#login" className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full border transition-all duration-300 shadow-sm hover:scale-105 ${isScrolled ? 'border-[#1a2c5b] text-[#1a2c5b] hover:bg-[#1a2c5b] hover:text-white' : 'border-white text-white hover:bg-white hover:text-[#1a2c5b]'}`}>
+                 <LogIn className="w-4 h-4" /> Login SSO
+               </a>
+            </div>
           </div>
-          <a href="#layanan" className={`text-xs font-bold uppercase tracking-widest px-5 py-2.5 rounded-full transition-all duration-300 hover:scale-105 shadow-sm ${isScrolled ? 'bg-[#1a2c5b] text-white' : 'bg-white text-[#1a2c5b]'}`}>
-            Layanan &rarr;
-          </a>
+
+          {/* Tombol Menu Mobile */}
+          <button 
+            className={`md:hidden p-2 rounded-md transition-colors ${isScrolled ? 'text-slate-900' : 'text-white'}`}
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
       </nav>
 
-      {/* ================= HERO SECTION (GAYA EDITORIAL & GLASS CARD) ================= */}
+      {/* Drawer Navigasi Mobile */}
+      <div className={`fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm transition-opacity duration-300 md:hidden ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsMobileMenuOpen(false)}>
+        <div 
+          className={`absolute bottom-0 inset-x-0 bg-white rounded-t-3xl p-6 pb-10 transition-transform duration-300 transform ${isMobileMenuOpen ? 'translate-y-0' : 'translate-y-full'}`}
+          onClick={e => e.stopPropagation()}
+        >
+          <div className="flex justify-between items-center mb-6">
+            <span className="font-bold text-[#1a2c5b] uppercase tracking-widest text-xs">Menu Navigasi</span>
+            <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 bg-slate-100 text-slate-500 rounded-full hover:bg-slate-200">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <div className="flex flex-col gap-5 text-sm font-bold uppercase tracking-widest text-slate-800">
+            <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3"><ArrowRight className="w-4 h-4 text-[#1a2c5b]" /> Profil Biro</a>
+            <a href="#kemahasiswaan" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3"><ArrowRight className="w-4 h-4 text-[#1a2c5b]" /> Kemahasiswaan</a>
+            <a href="#aik" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3"><ArrowRight className="w-4 h-4 text-[#1a2c5b]" /> AIK</a>
+            
+            {/* Tombol Login SSO Full Width di Mobile */}
+            <div className="mt-4">
+               <a href="#login" onClick={() => setIsMobileMenuOpen(false)} className="bg-[#1a2c5b] text-white text-center py-4 rounded-2xl shadow-lg flex justify-center items-center gap-2 hover:bg-blue-900 transition-colors">
+                 <LogIn className="w-5 h-5" /> Login SSO
+               </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Hero Section */}
       <section className="relative w-full h-[100svh] min-h-[700px] flex flex-col justify-between overflow-hidden bg-[#1a2c5b] pt-32 pb-12 px-6 md:px-12">
-        {/* Video Latar Belakang */}
         <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
           <source src={video} type="video/mp4" />
         </video>
 
-        {/* Gradasi Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d162e] via-[#1a2c5b]/60 to-[#1a2c5b]/40 pointer-events-none"></div>
 
-        {/* Konten Utama di Tengah/Atas */}
         <div className="relative z-10 w-full max-w-[90rem] mx-auto my-auto flex flex-col items-start justify-center text-left">
           <div className="flex items-center gap-3 mb-4">
             <span className="h-[2px] w-8 bg-blue-200"></span>
@@ -226,10 +264,7 @@ export default function App() {
           </p>
         </div>
 
-        {/* Panel Bawah (Glassmorphism Floating Cards) */}
         <div className="relative z-10 w-full max-w-[90rem] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          
-          {/* Card Berita/Info Singkat di Kiri Bawah */}
           <div className="w-full md:w-7/12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-5 md:p-6 flex items-center justify-between gap-4 text-white shadow-2xl">
             <div className="flex flex-col">
               <span className="text-[10px] font-bold uppercase tracking-widest text-blue-200 mb-1">Informasi Utama</span>
@@ -241,7 +276,6 @@ export default function App() {
             </a>
           </div>
 
-          {/* Mini Widget Layanan di Kanan Bawah */}
           <div className="hidden lg:flex items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 text-white shadow-2xl">
             <div className="w-12 h-12 rounded-xl bg-white/20 text-white flex items-center justify-center font-bold shadow-md">
               <Headset className="w-6 h-6 text-white" />
@@ -251,11 +285,10 @@ export default function App() {
               <span className="text-[10px] text-white/70 uppercase tracking-wider">Pendampingan Akademik</span>
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* Area profil singkat dan peran biro */}
+      {/* Profil Singkat */}
       <section id="about" className="w-full max-w-[90rem] mx-auto px-6 md:px-12 py-20 md:py-28 border-b border-slate-200">
         <div className="flex flex-col md:flex-row gap-12 md:gap-20 mb-20">
           <div className="md:w-1/2">
@@ -311,7 +344,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Area pilar kemahasiswaan sesuai panduan lomba */}
+      {/* Kemahasiswaan */}
       <section id="kemahasiswaan" className="w-full bg-[#f4f5f7] py-24">
         <div className="max-w-[90rem] mx-auto px-6 md:px-12">
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
@@ -322,15 +355,13 @@ export default function App() {
               Layanan terpadu yang didedikasikan untuk membangun iklim akademik dan non-akademik yang dinamis bagi seluruh civitas akademika.
             </p>
           </div>
-
           <KemahasiswaanAccordion />
         </div>
       </section>
 
-      {/* Area penjabaran AIK sesuai panduan lomba */}
+      {/* AIK */}
       <section id="aik" className="w-full bg-white py-24 md:py-32 border-b border-slate-200">
         <div className="max-w-[90rem] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-16 items-center">
-
           <div className="lg:w-1/2">
             <h2 className="text-4xl md:text-5xl font-medium leading-tight tracking-tight mb-6 text-slate-900">
               Al-Islam & Kemuhammadiyahan
@@ -349,10 +380,30 @@ export default function App() {
 
           <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
             {[
-              { id: 'aik1', title: 'Kegiatan Keagamaan', icon: <Star className="w-6 h-6" />, desc: "Fasilitasi pembinaan ibadah harian, program tahsin dan tahfiz Al-Qur'an, serta perayaan hari besar Islam komunitas siber." },
-              { id: 'aik2', title: 'Kajian Keislaman', icon: <BookOpen className="w-6 h-6" />, desc: "Penyelenggaraan majelis tarjih, diskusi pemikiran Islam kontemporer, dan bedah buku yang disiarkan langsung." },
-              { id: 'aik3', title: 'Syiar Digital', icon: <Mic className="w-6 h-6" />, desc: "Produksi konten dakwah kreatif, siniar (podcast) edukatif, dan pencerahan di dunia maya yang relevan untuk Gen-Z." },
-              { id: 'aik4', title: 'Nilai Kemuhammadiyahan', icon: <HeartHandshake className="w-6 h-6" />, desc: "Internalisasi pilar akhlakul karimah, tajdid, dan implementasi semangat kepedulian sosial secara konkrit." }
+              { 
+                id: 'aik1', 
+                title: 'Kegiatan Keagamaan', 
+                icon: <Star className="w-6 h-6" />, 
+                desc: "Mendorong kedisiplinan ibadah harian dan pembentukan karakter Islami secara mandiri melalui panduan materi digital terpadu." 
+              },
+              { 
+                id: 'aik2', 
+                title: 'Kajian Keislaman', 
+                icon: <BookOpen className="w-6 h-6" />, 
+                desc: "Pengkajian materi Al-Islam dan Kemuhammadiyahan secara asinkronus yang diintegrasikan langsung ke dalam mata kuliah wajib di sistem e-learning." 
+              },
+              { 
+                id: 'aik3', 
+                title: 'Syiar Digital', 
+                icon: <Mic className="w-6 h-6" />, 
+                desc: "Implementasi dakwah melalui etika bermedia sosial yang baik, literasi informasi sehat, serta tugas-tugas akademik mahasiswa." 
+              },
+              { 
+                id: 'aik4', 
+                title: 'Nilai Kemuhammadiyahan', 
+                icon: <HeartHandshake className="w-6 h-6" />, 
+                desc: "Internalisasi pilar akhlakul karimah, tajdid, dan etos kerja berkemajuan dalam kedisiplinan belajar di ekosistem siber." 
+              }
             ].map((item) => (
               <div key={item.id} className="bg-[#f8f9fa] border border-slate-200 p-8 rounded-[2rem] hover:shadow-md transition-shadow">
                 <div className="w-12 h-12 bg-white text-[#1a2c5b] rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-slate-100">
@@ -366,17 +417,15 @@ export default function App() {
         </div>
       </section>
 
-      {/* Area tanya jawab (FAQ) */}
+      {/* FAQ */}
       <section id="faq" className="w-full bg-[#f4f5f7] py-24">
         <FaqAccordion />
       </section>
 
-      {/* ================= SECTION: ELEGANT CTA FULL-WIDTH & DOCKED ================= */}
+      {/* Call to Action */}
       <section id="layanan" className="w-full bg-[#edf2f7] pt-20 px-6 md:px-12 relative overflow-hidden">
         <div className="max-w-[90rem] mx-auto flex flex-col lg:flex-row items-end justify-between">
-
-          {/* Sisi Kiri: Teks & Tombol */}
-          <div className="w-full lg:w-7/12 py-10 lg:py-20 flex flex-col justify-center items-start text-left z-10">
+          <div className="w-full lg:w-7/12 py-10 lg:py-20 flex flex-col justify-center items-center text-center lg:items-start lg:text-left z-10">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight leading-tight">
               Siap untuk mengembangkan potensimu?
             </h2>
@@ -388,23 +437,19 @@ export default function App() {
             </a>
           </div>
 
-          {/* Sisi Kanan: Gambar Diperbesar Maksimal di Versi Desktop */}
-          <div className="w-full lg:w-5/12 flex items-end justify-end relative self-end">
+          <div className="w-full lg:w-5/12 flex items-end justify-center lg:justify-end relative self-end mt-10 lg:mt-0">
             <img
               src={ctaImg}
               alt="Mahasiswa SiberMu"
-              className="h-[400px] md:h-[500px] lg:h-[580px] xl:h-[620px] object-contain object-bottom block w-auto max-w-none"
+              className="h-[450px] sm:h-[480px] md:h-[500px] lg:h-[580px] xl:h-[620px] object-contain object-bottom block w-[110%] max-w-none lg:w-auto"
             />
           </div>
-
         </div>
       </section>
 
-      {/* ================= FOOTER UTAMA (MENYATU TANPA JARAK) ================= */}
+      {/* Footer */}
       <footer className="w-full bg-[#0d162e] text-white/50 py-12 px-6 md:px-12">
         <div className="max-w-[90rem] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-
-          {/* Info Institusi */}
           <div className="flex flex-col items-center md:items-start gap-5 text-center md:text-left">
             <img src={logo} alt="Logo SiberMu" className="h-7 w-auto object-contain brightness-0 invert opacity-90" />
             <p className="text-xs md:text-sm leading-relaxed max-w-sm">
@@ -413,13 +458,11 @@ export default function App() {
               Jl. HOS Cokroaminoto No. 17, Yogyakarta
             </p>
           </div>
-
-          {/* Hak Cipta & Kredit */}
+          
           <div className="flex flex-col items-center md:items-end gap-2 text-[10px] md:text-xs font-medium uppercase tracking-widest text-white/40 text-center md:text-right">
             <p className="text-white/70 font-bold">Dikembangkan oleh Leonando Prastiko</p>
             <p>Hak Cipta &copy; 2026 SiberMu.</p>
           </div>
-
         </div>
       </footer>
     </div>
