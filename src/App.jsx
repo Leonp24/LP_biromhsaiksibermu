@@ -4,7 +4,6 @@ import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronDown, MessageCircle, Sta
 import logo from './assets/logo.png';
 import video from './assets/sibermu-hero.mp4';
 import orgImg from './assets/organisasi.jfif';
-import syiarImg from './assets/syiar.jfif';
 import prestasiImg from './assets/prestasi.jfif';
 import layananImg from './assets/layanan.jfif';
 import layananmhsImg from './assets/mahasiswi-layanan.jfif';
@@ -151,12 +150,14 @@ const FaqAccordion = () => {
           </div>
         ))}
       </div>
-      <div className="mt-16 bg-white border border-slate-200 border-dashed rounded-[2rem] p-6 flex flex-col md:flex-row justify-between items-center gap-6 hover:shadow-sm transition-shadow">
-        <div className="flex items-center gap-5 text-center md:text-left">
-          <div className="w-14 h-14 bg-[#1a2c5b] rounded-full flex items-center justify-center text-white shrink-0"><MessageCircle className="w-6 h-6" /></div>
+      <div className="mt-16 bg-white border border-slate-200 border-dashed rounded-[2rem] p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:shadow-sm transition-shadow">
+        <div className="flex items-center gap-4 md:gap-5 text-left">
+          <div className="w-12 h-12 md:w-14 md:h-14 bg-[#1a2c5b] rounded-full flex items-center justify-center text-white shrink-0">
+             <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
+          </div>
           <div>
-            <h4 className="font-bold text-slate-900 text-lg mb-1">Masih punya pertanyaan?</h4>
-            <p className="text-sm text-slate-500">Biro kami membalas dalam waktu 1x24 jam kerja.</p>
+            <h4 className="font-bold text-slate-900 text-base md:text-lg mb-1">Masih punya pertanyaan?</h4>
+            <p className="text-xs md:text-sm text-slate-500">Biro kami membalas dalam waktu 1x24 jam kerja.</p>
           </div>
         </div>
         <button className="w-full md:w-auto bg-[#1a2c5b] text-white px-8 py-3.5 rounded-full text-sm font-bold flex justify-center items-center gap-2 hover:bg-blue-900 transition-colors whitespace-nowrap">
@@ -441,7 +442,7 @@ export default function App() {
             <img
               src={ctaImg}
               alt="Mahasiswa SiberMu"
-              className="h-[450px] sm:h-[480px] md:h-[500px] lg:h-[580px] xl:h-[620px] object-contain object-bottom block w-[110%] max-w-none lg:w-auto"
+              className="h-[250px] sm:h-[480px] md:h-[500px] lg:h-[580px] xl:h-[620px] object-contain object-bottom block w-[110%] max-w-none lg:w-auto"
             />
           </div>
         </div>
@@ -461,7 +462,7 @@ export default function App() {
           
           <div className="flex flex-col items-center md:items-end gap-2 text-[10px] md:text-xs font-medium uppercase tracking-widest text-white/40 text-center md:text-right">
             <p className="text-white/70 font-bold">Dikembangkan oleh Leonando Prastiko</p>
-            <p>Hak Cipta &copy; 2026 SiberMu.</p>
+            <p>Hak Cipta &copy; 2026 Leonp24.</p>
           </div>
         </div>
       </footer>
